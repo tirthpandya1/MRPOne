@@ -204,6 +204,81 @@
      - Margin determination
      - Product-level profitability
 
+## Workstation Sequence Management Use Cases
+
+### UC-WS01: Define Product Manufacturing Sequence
+**Actor**: Production Planner
+**Preconditions**: 
+- Product specifications are available
+- Workstations are configured in the system
+
+**Flow**:
+1. Production Planner selects a product
+2. System displays available workstations
+3. Planner defines sequential manufacturing steps
+4. System validates sequence feasibility
+5. Save and confirm workstation sequence
+
+### UC-WS02: Optimize Manufacturing Sequence
+**Actor**: Manufacturing Engineer
+**Preconditions**:
+- Existing product sequence
+- Performance data available
+
+**Flow**:
+1. Retrieve current product manufacturing sequence
+2. Analyze historical performance metrics
+3. Identify potential bottlenecks
+4. Propose sequence modifications
+5. Simulate proposed changes
+6. Validate and update sequence
+
+### UC-WS03: Real-time Sequence Tracking
+**Actor**: Production Supervisor
+**Preconditions**:
+- Active production order
+- Workstation sequence defined
+
+**Flow**:
+1. View current production order
+2. Track progress through workstation sequence
+3. Monitor real-time status of each station
+4. Receive alerts for potential delays
+5. Make dynamic rerouting decisions
+
+### UC-WS04: Resource Allocation for Sequence
+**Actor**: Resource Manager
+**Preconditions**:
+- Defined workstation sequence
+- Available resources
+
+**Flow**:
+1. Load product manufacturing sequence
+2. Analyze resource requirements
+3. Match resources to workstation needs
+4. Resolve resource conflicts
+5. Generate optimal allocation plan
+
+### UC-WS05: Predictive Maintenance Integration
+**Actor**: Maintenance Technician
+**Preconditions**:
+- Workstation performance data
+- Maintenance history
+
+**Flow**:
+1. Retrieve workstation sequence details
+2. Analyze station-specific wear patterns
+3. Predict maintenance requirements
+4. Schedule preventive maintenance
+5. Update sequence to minimize disruption
+
+### Performance Metrics for Sequence Management
+- Average Sequence Completion Time
+- Station Utilization Rate
+- Resource Idle Time
+- Process Efficiency Score
+- Predictive Maintenance Accuracy
+
 ## Technological Enablers
 - AI/ML-powered predictive algorithms
 - Real-time data synchronization

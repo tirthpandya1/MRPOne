@@ -194,6 +194,121 @@ class PerformanceMetrics:
     inventory_turnover: float
 ```
 
+## 8. Workstation Sequence Model
+
+### WorkstationSequence Class
+```python
+class WorkstationSequence:
+    def __init__(self, product_id, sequence):
+        """
+        Represents a predefined manufacturing sequence for a specific product
+        
+        Args:
+            product_id (str): Unique identifier for the product
+            sequence (List[Workstation]): Ordered list of workstations
+        """
+        self.product_id = product_id
+        self.sequence = sequence
+        self.dependencies = self._analyze_dependencies()
+    
+    def _analyze_dependencies(self):
+        """
+        Analyze dependencies and potential bottlenecks in the workstation sequence
+        
+        Returns:
+            Dict: Mapping of workstations with their dependencies and constraints
+        """
+        dependencies = {}
+        for i, workstation in enumerate(self.sequence):
+            dependencies[workstation] = {
+                'previous_station': self.sequence[i-1] if i > 0 else None,
+                'next_station': self.sequence[i+1] if i < len(self.sequence) - 1 else None,
+                'processing_time_estimate': workstation.estimated_processing_time,
+                'resource_requirements': workstation.resource_requirements
+            }
+        return dependencies
+    
+    def validate_sequence(self):
+        """
+        Validate the manufacturing sequence for feasibility
+        
+        Returns:
+            bool: Whether the sequence is valid
+        """
+        # Check for circular dependencies
+        # Validate resource availability
+        # Ensure all required workstations are present
+        pass
+
+class Workstation:
+    def __init__(self, station_id, name, capabilities, 
+                 estimated_processing_time, resource_requirements):
+        """
+        Represents a specific manufacturing workstation
+        
+        Args:
+            station_id (str): Unique identifier for the workstation
+            name (str): Descriptive name of the workstation
+            capabilities (List[str]): Manufacturing processes this station can perform
+            estimated_processing_time (float): Average time to complete a process
+            resource_requirements (Dict): Resources needed for operation
+        """
+        self.station_id = station_id
+        self.name = name
+        self.capabilities = capabilities
+        self.estimated_processing_time = estimated_processing_time
+        self.resource_requirements = resource_requirements
+```
+
+### Example Workstation Sequence
+```python
+# Example: Manufacturing a complex mechanical component
+widget_manufacturing_sequence = WorkstationSequence(
+    product_id='WIDGET-001',
+    sequence=[
+        Workstation(
+            station_id='CNC-01', 
+            name='CNC Machining', 
+            capabilities=['Precision Cutting', 'Drilling'],
+            estimated_processing_time=45.5,
+            resource_requirements={
+                'electricity': 5.2,  # kWh
+                'operator_skill_level': 'Advanced'
+            }
+        ),
+        Workstation(
+            station_id='WELD-02',
+            name='Welding Station', 
+            capabilities=['Welding', 'Joining'],
+            estimated_processing_time=30.0,
+            resource_requirements={
+                'electricity': 3.8,  # kWh
+                'welding_gas': 0.5,  # m³
+                'operator_skill_level': 'Intermediate'
+            }
+        ),
+        # Additional workstations...
+    ]
+)
+```
+
+### Sequence Analysis Methods
+- Bottleneck Detection
+- Resource Optimization
+- Process Time Estimation
+- Parallel Processing Identification
+
+### Key Relationships
+- `Product` ➡️ `WorkstationSequence`: One-to-One mapping
+- `WorkstationSequence` ➡️ `Workstation`: One-to-Many relationship
+- `Workstation` ➡️ `Resource`: Many-to-Many relationship
+
+### Performance Metrics
+- Throughput Rate
+- Station Utilization
+- Idle Time
+- Process Efficiency
+
 ## Bill of Materials (BOM) and Dependency Graph Management
 
 ### Comprehensive BOM Modeling System
